@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorAccent">#FF4081</color>
+
+    <color name="pn_white">#FFFFFF</color>
+    <color name="pn_blue">#68B1F3</color>
+    <color name="pn_light_grey">#F3F3F3</color>
+    <color name="pn_grey">#848484</color>
+    <color name="pn_disable">#CCD7E1</color>
+    <color name="pn_medium_grey">#AAAAAA</color>
+    <color name="semi_blue_transparent_100">#FF0080EF</color>
+    <color name="semi_blue_transparent_95">#F20080EF</color>
+    <color name="semi_blue_transparent_90">#E60080EF</color>
+    <color name="semi_blue_transparent_85">#D90080EF</color>
+    <color name="semi_blue_transparent_80">#CC0080EF</color>
+    <color name="semi_blue_transparent_75">#BF0080EF</color>
+    <color name="semi_blue_transparent_70">#B30080EF</color>
+    <color name="semi_blue_transparent_65">#A60080EF</color>
+    <color name="semi_blue_transparent_60">#990080EF</color>
+    <color name="semi_blue_transparent_55">#8C0080EF</color>
+    <color name="semi_blue_transparent_50">#800080EF</color>
+    <color name="semi_blue_transparent_45">#730080EF</color>
+    <color name="semi_blue_transparent_40">#660080EF</color>
+    <color name="semi_blue_transparent_35">#590080EF</color>
+    <color name="semi_blue_transparent_30">#4D0080EF</color>
+    <color name="semi_blue_transparent_25">#400080EF</color>
+    <color name="semi_blue_transparent_20">#330080EF</color>
+    <color name="semi_blue_transparent_15">#260080EF</color>
+    <color name="semi_blue_transparent_10">#1A0080EF</color>
+    <color name="semi_blue_transparent_5">#0D0080EF</color>
+
+</resources>

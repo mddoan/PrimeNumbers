@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+    <LinearLayout android:layout_width="match_parent"
+                  android:layout_height="wrap_content"
+                  android:orientation="vertical" android:background="@color/pn_light_grey"
+                  android:padding="10dp">
+        <LinearLayout android:layout_width="match_parent"
+                     android:layout_height="wrap_content" android:orientation="vertical"
+                      android:background="@drawable/rect_solid_white_all_round_corners"
+                      android:padding="10dp">
+            <TextView style="@style/header_style"
+                      android:text="@string/header_1"/>
+            <LinearLayout android:layout_width="match_parent"
+                          android:layout_height="wrap_content" android:orientation="vertical">
+
+                <LinearLayout android:layout_width="match_parent"
+                              android:layout_height="wrap_content" android:orientation="horizontal">
+                    <TextView
+                        style="@style/edit_text_label_style"
+                        android:text="Enter a number:"/>
+                    <EditText android:layout_width="match_parent" android:layout_height="wrap_content"
+                              android:id="@+id/editTextFindN"
+                              android:inputType="number"/>
+                </LinearLayout>
+
+                <Button style="@style/button_submit_style"
+                        android:id="@+id/buttonSubmit"/>
+            </LinearLayout>
+
+            <LinearLayout android:layout_width="match_parent"
+                          android:layout_height="wrap_content" android:orientation="vertical"
+                          android:id="@+id/linearLayoutResultNContainer">
+                <TextView style="@style/result_text_style" android:id="@+id/textViewCount"/>
+
+                <RelativeLayout android:layout_width="wrap_content"
+                                android:layout_height="wrap_content" android:background="@color/semi_blue_transparent_15"
+                                android:paddingTop="5dp" android:paddingBottom="5dp">
+
+                    <android.support.v7.widget.RecyclerView
+                        android:id="@+id/recycleView"
+                        android:scrollbars="vertical"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"/>
+
+
+                </RelativeLayout>
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+
+
+
+
+        <LinearLayout android:layout_width="match_parent"
+                      android:layout_height="wrap_content" android:orientation="vertical"
+                      android:background="@drawable/rect_solid_white_all_round_corners"
+                      android:padding="10dp" android:layout_marginTop="10dp">
+            <TextView style="@style/header_style"
+                      android:text="@string/header_2"/>
+            <LinearLayout android:layout_width="match_parent"
+                          android:layout_height="wrap_content" android:orientation="vertical">
+                <LinearLayout android:layout_width="match_parent"
+                              android:layout_height="wrap_content" android:orientation="horizontal">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Enter a number:"/>
+                    <EditText android:layout_width="match_parent" android:layout_height="wrap_content"
+                              android:id="@+id/editTextFindNth"
+                              android:inputType="number"/>
+                </LinearLayout>
+
+                <Button style="@style/button_submit_style"
+                        android:id="@+id/buttonSubmitNth"/>
+            </LinearLayout>
+            <TextView style="@style/result_text_style" android:id="@+id/textViewFindNthResult"/>
+
+
+        </LinearLayout>
+
+
+
+
+    </LinearLayout>
+
+
+</ScrollView>

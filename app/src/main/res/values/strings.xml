@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">Prime Numbers</string>
+    <string name="header_1">Find N Prime Numbers</string>
+    <string name="header_2">Find Nth Prime Number</string>
+    <string name="button_label">Submit</string>
+    <string name="count_result_single">You have found %s prime number</string>
+    <string name="count_result_plural">You have found %s prime numbers</string>
+    <string name="search_nth_prime_found_result_text">The Nth prime number is %s</string>
+    <string name="search_nth_prime_not_found_result_text">%1$sth prime number cannot be found
+        within the range from 1 to %2$s</string>
+</resources>
