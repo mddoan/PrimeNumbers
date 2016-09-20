@@ -1,0 +1,1 @@
+Prime Numbers is the app that can be used to find all prime numbers within the range from 1 to a given number N. It also allows users to quickly find the Nth prime number within that range. 

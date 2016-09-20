@@ -5,7 +5,7 @@
     <LinearLayout android:layout_width="match_parent"
                   android:layout_height="wrap_content"
                   android:orientation="vertical" android:background="@color/pn_light_grey"
-                  android:padding="10dp">
+                  android:padding="10dp" android:id="@+id/linearLayoutMainContainer">
         <LinearLayout android:layout_width="match_parent"
                      android:layout_height="wrap_content" android:orientation="vertical"
                       android:background="@drawable/rect_solid_white_all_round_corners"
@@ -43,7 +43,6 @@
                         android:scrollbars="vertical"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"/>
-
 
                 </RelativeLayout>
             </LinearLayout>

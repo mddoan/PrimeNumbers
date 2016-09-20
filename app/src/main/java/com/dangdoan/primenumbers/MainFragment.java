@@ -1,9 +1,13 @@
 package com.dangdoan.primenumbers;
 
+import android.animation.Animator;
+import android.animation.AnimatorListenerAdapter;
 import android.content.Context;
 import android.content.res.Configuration;
+import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v4.app.Fragment;
 import android.support.v4.text.TextUtilsCompat;
 import android.support.v7.widget.LinearLayoutManager;
@@ -18,6 +22,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -45,7 +50,8 @@ public class MainFragment extends Fragment{
     private static final int READ_BLOCK_SIZE = 100;
     private static final String OUT = "prime";
     private int count = 0;
-    private int greatestInput;
+    private ProgressBar mProgress;
+    private Handler mHandler;
 
     public static MainFragment newInstance(){
         return new MainFragment();
@@ -54,6 +60,7 @@ public class MainFragment extends Fragment{
     @Override
     public void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
+        mHandler = new Handler();
     }
 
     @Override
@@ -94,6 +101,7 @@ public class MainFragment extends Fragment{
         buttonSubmitNth = (Button) root.findViewById(R.id.buttonSubmitNth);
         buttonSubmitNth.setEnabled(false);
         buttonSubmitNth.setOnClickListener(buttonSubmitNthClicked);
+
         return root;
     }
 
@@ -151,6 +159,7 @@ public class MainFragment extends Fragment{
     private View.OnClickListener buttonSubmitClicked = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
+            showProgress();
             computePrimeNumbers();
         }
     };
@@ -182,54 +191,43 @@ public class MainFragment extends Fragment{
     }
 
     private void computePrimeNumbers(){
-        if(input < 2){
-            Toast toast = Toast.makeText(getActivity(), "Pleas enter number greater than 1", Toast.LENGTH_LONG);
-            toast.show();
-            return;
-        }
-
         clearOldOutput();
+        ComputePrimeNumbersAsync computePrimeNumbersAsync = new ComputePrimeNumbersAsync();
+        Integer []params = {input};
+        computePrimeNumbersAsync.execute(params);
 
+//        if(input < 2){
+//            Toast toast = Toast.makeText(getActivity(), "Pleas enter number greater than 1", Toast.LENGTH_LONG);
+//            toast.show();
+//            return;
+//        }
+//
+//        StringBuilder stringBuilder = new StringBuilder();
+//        int start = 2;
+//        int limit = input;
+//
+//
+//        boolean [] isPrime = new boolean[limit];
+//        for(int i=start; i<limit; i++){
+//            isPrime[i] = true;
+//        }
+//
+//        for(int i=start; i<Math.sqrt(limit); i++){
+//            if(isPrime[i]){
+//                for(int j = (int) Math.pow(i,2); j<limit; j = j+i){
+//                    isPrime[j] = false;
+//
+//                }
+//            }
+//        }
+//
+//        for(int i=start; i<limit; i++) {
+//            if(isPrime[i]){
+//                stringBuilder.append(i + ",");
+//                count++;
+//            }
+//        }
 
-
-        StringBuilder stringBuilder = new StringBuilder();
-        int start = 2;
-        int limit = input;
-
-
-        boolean [] isPrime = new boolean[limit];
-        for(int i=start; i<limit; i++){
-            isPrime[i] = true;
-        }
-
-        for(int i=start; i<Math.sqrt(limit); i++){
-            if(isPrime[i]){
-                for(int j = (int) Math.pow(i,2); j<limit; j = j+i){
-                    isPrime[j] = false;
-
-                }
-            }
-        }
-
-        for(int i=start; i<limit; i++) {
-            if(isPrime[i]){
-                stringBuilder.append(i + ",");
-                count++;
-            }
-        }
-
-        stringBuilder.deleteCharAt(stringBuilder.length() - 1);
-        storePrimesToBin(stringBuilder.toString());
-        int strId;
-        if(count == 1){
-            strId = R.string.count_result_single;
-        }else{
-            strId = R.string.count_result_plural;
-        }
-        textViewCount.setText(getString(strId, count));
-        mAdapter.setData();
-        mAdapter.notifyDataSetChanged();
-        showNResultView();
 
     }
 
@@ -374,4 +372,85 @@ public class MainFragment extends Fragment{
             // do nothing for now
         }
     }
+
+    private void showProgress(){
+        ((MainActivity)getActivity()).showProgress();
+    }
+
+    private void hideProgress(){
+        ((MainActivity)getActivity()).hideProgress();
+    }
+
+    public void onProcessComplete(StringBuilder stringBuilder, int count){
+        stringBuilder.deleteCharAt(stringBuilder.length() - 1);
+        storePrimesToBin(stringBuilder.toString());
+        int strId;
+        if(count == 1){
+            strId = R.string.count_result_single;
+        }else{
+            strId = R.string.count_result_plural;
+        }
+        textViewCount.setText(getString(strId, count));
+        mAdapter.setData();
+        mAdapter.notifyDataSetChanged();
+        showNResultView();
+    }
+
+
+    public class ComputePrimeNumbersAsync extends AsyncTask<Integer, Long, Boolean> {
+        private int count;
+        StringBuilder stringBuilder;
+
+        @Override
+        protected Boolean doInBackground(Integer... params) {
+            boolean success = false;
+            int input = params[0];
+            if (input > 2) {
+                stringBuilder = new StringBuilder();
+                int start = 2;
+                int limit = input;
+                boolean[] isPrime = new boolean[limit];
+                for (int i = start; i < limit; i++) {
+                    isPrime[i] = true;
+                }
+
+                for (int i = start; i < Math.sqrt(limit); i++) {
+                    if (isPrime[i]) {
+                        for (int j = (int) Math.pow(i, 2); j < limit; j = j + i) {
+                            isPrime[j] = false;
+
+                        }
+                    }
+                }
+
+                for (int i = start; i < limit; i++) {
+                    if (isPrime[i]) {
+                        stringBuilder.append(i + ",");
+                        count++;
+                    }
+                }
+                success = true;
+            }
+
+            return success;
+        }
+
+        @Override
+        protected void onPreExecute() {
+            showProgress();
+        }
+
+        @Override
+        protected void onPostExecute(Boolean success) {
+            onProcessComplete(stringBuilder, count);
+        }
+    }
+
+
+    Runnable r = new Runnable() {
+        @Override
+        public void run() {
+            hideProgress();
+        }
+    };
 }
